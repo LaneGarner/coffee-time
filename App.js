@@ -1,21 +1,63 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { ThemeProvider } from "styled-components/native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { ContextProvider } from "./src/Context";
+import { Ionicons } from "@expo/vector-icons";
+import { theme } from "./src/utils/theme/index";
+import { TimerScreen } from "./src/screens/timer/timer.screen";
+import { BrewMethodsScreen } from "./src/screens/brew-methods/brew-methods.screen";
+import { SettingsScreen } from "./src/screens/settings/settings.screen";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const Tab = createBottomTabNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const TAB_ICON = {
+  Timer: "timer-outline",
+  "Brew Methods": "water-outline",
+  Settings: "settings-outline",
+};
+
+const tabBarIcon =
+  (iconName) =>
+  ({ size, color }) =>
+    <Ionicons name={iconName} size={size} color={color} />;
+
+const screenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: tabBarIcon(iconName),
+  };
+};
+
+const linking = {
+  config: {
+    screens: {
+      Timer: "timer",
+      "Brew Methods": "brew-methods",
+    },
   },
-});
+};
+
+const App = () => {
+  return (
+    <ContextProvider>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer linking={linking}>
+          <Tab.Navigator
+            screenOptions={screenOptions}
+            tabBarOptions={{
+              activeTintColor: "dodgerblue",
+              inactiveTintColor: "gray",
+            }}
+          >
+            <Tab.Screen name="Timer" component={TimerScreen} />
+            <Tab.Screen name="Brew Methods" component={BrewMethodsScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
+    </ContextProvider>
+  );
+};
+
+export default App;
