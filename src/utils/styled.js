@@ -32,6 +32,11 @@ export const TimerValue = styled.Text`
   color: #333;
   font-size: 28px;
 `;
+export const TimerValueEdit = styled.TextInput`
+  color: #333;
+  font-size: 28px;
+  border: none;
+`;
 
 export const HeaderContainer = styled.View`
   align-items: center;

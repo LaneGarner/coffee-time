@@ -10,6 +10,10 @@ export const TimerContainer = styled.View`
   margin: 15px 20px;
   align-items: center;
 `;
+export const TouchableTimerContainer = styled.TouchableOpacity`
+  margin: 15px 20px;
+  align-items: center;
+`;
 
 export const TimerContainerAlt = styled.View`
   flex-direction: row;

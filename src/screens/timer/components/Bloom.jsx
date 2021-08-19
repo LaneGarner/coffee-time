@@ -24,12 +24,12 @@ export const Bloom = ({ next }) => {
       <TimerContainer>
         <TimerContainer>
           <TimerTitle>pour</TimerTitle>
-          <TimerValue>{Math.round(bloomWater * 100) / 100}g</TimerValue>
+          <TimerValue>{Math.round((bloomWater * 100) / 100)}g</TimerValue>
         </TimerContainer>
         <Timer next={next} time={Math.round(recipe.bloom)} addWater={bloomWater} />
       </TimerContainer>
       <TimerTitle>final pour weight</TimerTitle>
-      <TimerValue>{Math.round(recipe.coffee * recipe.ratio * 100) / 100}g</TimerValue>
+      <TimerValue>{Math.round((recipe.coffee * recipe.ratio * 100) / 100)}g</TimerValue>
     </PourContainer>
   );
 };

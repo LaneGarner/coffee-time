@@ -8,6 +8,10 @@ export const Sound = () => {
   const { repeatAlarm, setRepeatAlarm } = useContext(Context);
   const playSound = useRef(null);
 
+  Audio.setAudioModeAsync({
+    playsInSilentModeIOS: true,
+  });
+
   const loadSound = async () => {
     const { sound } = await Audio.Sound.createAsync(require("../../../hello.mp3"));
     setSound(sound);
@@ -24,7 +28,7 @@ export const Sound = () => {
   }, []);
 
   useEffect(() => {
-    repeatAlarm ? (playSound.current = setInterval(loadSound, 1000)) : clearAlarm();
+    repeatAlarm ? (playSound.current = setInterval(loadSound, 10000)) : clearAlarm();
 
     return () => {
       clearAlarm();

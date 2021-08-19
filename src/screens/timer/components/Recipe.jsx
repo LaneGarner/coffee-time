@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text } from "react-native";
-import { prototype } from "react-native/Libraries/Utilities/PixelRatio";
 
 import { Context } from "../../../Context";
 
-import { TimerTitle, TimerValue } from "../../../utils/styled";
+import { TimerTitle, TimerValue, TimerValueEdit } from "../../../utils/styled";
 
-import { TimerContainer, TimerContainerAlt, Btn, BtnText } from "../styled";
+import { TouchableTimerContainer, TimerContainer, TimerContainerAlt, Btn, BtnText } from "../styled";
 
 export const Recipe = ({ next }) => {
   const { ratio, setRatio, coffee, setCoffee, brewMethod, setBrewMethod, recipe, setRecipe, active, setActive } = useContext(Context);
+  const [editCoffee, setEditCoffee] = useState(false);
+  const [coffeeState, setCoffeeState] = useState(Math.round(recipe.coffee).toString());
 
   const methods = [
     {
@@ -18,10 +19,10 @@ export const Recipe = ({ next }) => {
       coffee: 60,
       grind: "medium",
       temp: 200,
-      // bloom: 45,
-      // interval: 90,
-      bloom: 4,
-      interval: 11,
+      bloom: 45,
+      interval: 90,
+      // bloom: 4,
+      // interval: 11,
     },
     {
       method: "aeropress",
@@ -66,6 +67,21 @@ export const Recipe = ({ next }) => {
     },
   ];
 
+  const handleEditCoffeeClick = () => {
+    //
+    setEditCoffee(!editCoffee);
+  };
+
+  const handleEditCoffee = (e) => {
+    //
+    setCoffeeState(e);
+  };
+
+  useEffect(() => {
+    if (coffeeState === "") return;
+    setRecipe({ ...recipe, coffee: parseInt(coffeeState) });
+  }, [coffeeState]);
+
   useEffect(() => {
     methods.forEach((method) => {
       method.method === brewMethod && setRecipe(method);
@@ -87,10 +103,22 @@ export const Recipe = ({ next }) => {
           <TimerTitle>water</TimerTitle>
           <TimerValue>{Math.round(recipe?.coffee * ratio * 100) / 100 || Math.round(recipe?.tea * ratio * 100) / 100}g</TimerValue>
         </TimerContainer>
-        <TimerContainer>
-          {recipe.coffee ? <TimerTitle>coffee</TimerTitle> : <TimerTitle>tea</TimerTitle>}
-          <TimerValue>{Math.round(recipe?.coffee * 100) / 100 || Math.round(recipe?.tea * 100) / 100}g</TimerValue>
-        </TimerContainer>
+        {recipe.coffee && (
+          <TouchableTimerContainer onPress={handleEditCoffeeClick}>
+            <TimerTitle>coffee</TimerTitle>
+            {editCoffee ? (
+              <TimerValueEdit onChangeText={setCoffeeState} value={coffeeState} keyboardType="number-pad" autoFocus />
+            ) : (
+              <TimerValue>{Math.round(recipe.coffee)}g</TimerValue>
+            )}
+          </TouchableTimerContainer>
+        )}
+        {recipe.tea && (
+          <TimerContainer>
+            {<TimerTitle>tea</TimerTitle>}
+            <TimerValue>{Math.round(recipe.tea * 100) / 100}g</TimerValue>
+          </TimerContainer>
+        )}
       </TimerContainerAlt>
       {recipe.grind && (
         <TimerContainer>
