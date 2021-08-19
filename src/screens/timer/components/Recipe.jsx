@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import { Context } from "../../../Context";
 
 import { TimerTitle, TimerValue, TimerValueEdit } from "../../../utils/styled";
-
 import { TouchableTimerContainer, TimerContainer, TimerContainerAlt, Btn, BtnText } from "../styled";
 
 export const Recipe = ({ next }) => {
@@ -67,26 +66,14 @@ export const Recipe = ({ next }) => {
     },
   ];
 
-  const handleEditCoffeeClick = () => {
-    //
-    setEditCoffee(!editCoffee);
-  };
-
-  const handleEditCoffee = (e) => {
-    //
-    setCoffeeState(e);
-  };
+  const handleEditCoffeeClick = () => setEditCoffee(!editCoffee);
 
   useEffect(() => {
     if (coffeeState === "") return;
     setRecipe({ ...recipe, coffee: parseInt(coffeeState) });
   }, [coffeeState]);
 
-  useEffect(() => {
-    methods.forEach((method) => {
-      method.method === brewMethod && setRecipe(method);
-    });
-  }, [brewMethod]);
+  useEffect(() => methods.forEach((item) => item.method === brewMethod && setRecipe(item)), [brewMethod]);
 
   return (
     <>
@@ -107,7 +94,10 @@ export const Recipe = ({ next }) => {
           <TouchableTimerContainer onPress={handleEditCoffeeClick}>
             <TimerTitle>coffee</TimerTitle>
             {editCoffee ? (
-              <TimerValueEdit onChangeText={setCoffeeState} value={coffeeState} keyboardType="number-pad" autoFocus />
+              <View style={{ flexDirection: "row" }}>
+                <TimerValueEdit onChangeText={setCoffeeState} value={coffeeState} keyboardType="decimal-pad" keyboardAppearance="dark" autoFocus />
+                <TimerValue>g</TimerValue>
+              </View>
             ) : (
               <TimerValue>{Math.round(recipe.coffee)}g</TimerValue>
             )}
@@ -141,8 +131,8 @@ export const Recipe = ({ next }) => {
           <TimerValue>{recipe.interval}s</TimerValue>
         </TimerContainer>
       </TimerContainerAlt>
-      <Btn onPress={next}>
-        <BtnText>Start</BtnText>
+      <Btn style={{ marginTop: 25 }} onPress={next}>
+        <BtnText>start</BtnText>
       </Btn>
     </>
   );

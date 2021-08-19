@@ -10,6 +10,7 @@ export const TimerContainer = styled.View`
   margin: 15px 20px;
   align-items: center;
 `;
+
 export const TouchableTimerContainer = styled.TouchableOpacity`
   margin: 15px 20px;
   align-items: center;
@@ -22,13 +23,24 @@ export const TimerContainerAlt = styled.View`
 export const Btn = styled.TouchableOpacity`
   background-color: dodgerblue;
   border-radius: 30px;
-  margin-vertical: 30px;
+  margin-top: 10px;
 `;
 
 export const BtnText = styled.Text`
   font-size: 30px;
   text-align: center;
   color: white;
+  padding: 10px 60px;
+`;
+
+export const NextBtn = styled.TouchableOpacity`
+  /* margin-vertical: 10px; */
+`;
+
+export const NextBtnText = styled.Text`
+  font-size: 25px;
+  text-align: center;
+  color: dodgerblue;
   padding: 10px 60px;
 `;
 

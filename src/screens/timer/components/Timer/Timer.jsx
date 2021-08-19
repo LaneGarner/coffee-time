@@ -4,6 +4,7 @@ import { useKeepAwake } from "expo-keep-awake";
 import { Audio } from "expo-av";
 import { Countdown } from "../../components/Countdown";
 import { RoundedButton } from "../../components/RoundedButton";
+import { NextButton } from "../../components/NextButton";
 
 import { Context } from "../../../../Context";
 
@@ -72,6 +73,7 @@ export const Timer = ({ time, next, addWater }) => {
       <View style={styles.buttonWrapper}>
         {isStarted ? <RoundedButton title="pause" onPress={() => setIsStarted(false)} /> : <RoundedButton title="start" onPress={startTimer} />}
       </View>
+      <NextButton title="next" onPress={onEnd} />
     </View>
   );
 };

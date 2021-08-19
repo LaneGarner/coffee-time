@@ -38,6 +38,16 @@ export const TimerValueEdit = styled.TextInput`
   border: none;
 `;
 
+export const PourTitle = styled.Text`
+  color: #7e7e7e;
+  font-size: 24px;
+`;
+
+export const PourValue = styled.Text`
+  color: #333;
+  font-size: 40px;
+`;
+
 export const HeaderContainer = styled.View`
   align-items: center;
   margin-vertical: 10px;

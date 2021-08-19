@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Context } from "../../../Context";
 import { Timer } from "./Timer/Timer";
 import { TimerContainer, PourContainer } from "../styled";
-import { TimerTitle, TimerValue, Heading } from "../../../utils/styled";
+import { TimerTitle, TimerValue, PourTitle, PourValue, Heading } from "../../../utils/styled";
 
 export const Bloom = ({ next }) => {
   const { recipe, brewMethod } = useContext(Context);
@@ -23,8 +23,8 @@ export const Bloom = ({ next }) => {
       <Heading>bloom</Heading>
       <TimerContainer>
         <TimerContainer>
-          <TimerTitle>pour</TimerTitle>
-          <TimerValue>{Math.round((bloomWater * 100) / 100)}g</TimerValue>
+          <PourTitle>pour</PourTitle>
+          <PourValue>{Math.round((bloomWater * 100) / 100)}g</PourValue>
         </TimerContainer>
         <Timer next={next} time={Math.round(recipe.bloom)} addWater={bloomWater} />
       </TimerContainer>

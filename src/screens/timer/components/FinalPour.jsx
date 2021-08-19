@@ -4,7 +4,7 @@ import { Context } from "../../../Context";
 import { Sound } from "./Sound";
 import { Timer } from "./Timer/Timer";
 import { TimerContainer, PourContainer } from "../styled";
-import { TimerTitle, TimerValue, Heading } from "../../../utils/styled";
+import { TimerTitle, TimerValue, Heading, PourTitle, PourValue } from "../../../utils/styled";
 
 export const FinalPour = ({ next }) => {
   const { recipe, waterUsed, brewMethod } = useContext(Context);
@@ -23,8 +23,8 @@ export const FinalPour = ({ next }) => {
       <Sound />
       <Heading>final pour</Heading>
       <TimerContainer>
-        <TimerTitle>pour to</TimerTitle>
-        <TimerValue>{Math.round((waterUsed + pourWater) * 100) / 100}g</TimerValue>
+        <PourTitle>pour to</PourTitle>
+        <PourValue>{Math.round((waterUsed + pourWater) * 100) / 100}g</PourValue>
       </TimerContainer>
       <TimerContainer>
         <Timer time={brewTime} next={next} addWater={pourWater} />
