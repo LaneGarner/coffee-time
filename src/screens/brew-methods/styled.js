@@ -12,5 +12,4 @@ export const BrewIconContainer = styled.View`
 
 export const BrewMethodsContainerStyled = styled.View`
   align-items: center;
-  margin-top: 20%;
 `;

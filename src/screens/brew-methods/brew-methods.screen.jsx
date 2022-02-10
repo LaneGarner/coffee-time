@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useLinkTo } from "@react-navigation/native";
-import { View } from 'react-native';
 import { Chemex } from "../../images/Chemex";
 import { Aeropress } from "../../images/Aeropress";
 import { FrenchPress } from "../../images/FrenchPress";
 
-import { PageContainer, Heading, SafeArea, TimerTitle, TimerValue } from "../../utils/styled";
+import { PageContainer, SafeArea, TimerTitle } from "../../utils/styled";
 import { colors } from "../../utils/theme/colors";
 import { Context } from "../../Context";
 
@@ -34,8 +33,8 @@ export const BrewMethodsScreen = () => {
             <Chemex handleChangeBrewMethod={handleChangeBrewMethod} color={colors.black} />
           </BrewIconContainer>
           <BrewIconContainer>
-            <Aeropress handleChangeBrewMethod={handleChangeBrewMethod} />
             <FrenchPress handleChangeBrewMethod={handleChangeBrewMethod} color={colors.black} />
+            <Aeropress handleChangeBrewMethod={handleChangeBrewMethod} />
           </BrewIconContainer>
         </BrewMethodsContainerStyled>
       </PageContainer>
