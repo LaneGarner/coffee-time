@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 import { Context } from "../../Context";
 
@@ -12,14 +12,13 @@ import { FinalPour } from "./components/FinalPour";
 import { CoffeeTime } from "./components/CoffeeTime";
 
 export const TimerScreen = () => {
-  const { active, setActive, brewMethod, recipe, setWaterUsed } = useContext(Context);
+  const { active, setActive, brewMethod } = useContext(Context);
 
   const next = () => {
     setActive(active + 1);
   };
 
   let content;
-  // const content = [<Recipe next={next} />, <Bloom next={next} />, <FirstPour next={next} />, <SecondPour next={next} />, <FinalPour next={next} />, <CoffeeTime next={next} />];
 
   console.log(brewMethod);
   {
@@ -36,10 +35,6 @@ export const TimerScreen = () => {
     brewMethod === "aeropress" && (content = [<Recipe next={next} />, <Bloom next={next} />, <FinalPour next={next} />, <CoffeeTime next={next} />]);
   }
 
-  // useEffect(() => {
-  //   setActive(0);
-  //   setWaterUsed(0);
-  // }, [brewMethod]);
 
   return (
     <SafeArea>

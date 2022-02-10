@@ -6,7 +6,7 @@ I make pour-over coffee every day but I often get distracted while doing so. Whe
 
 Enter coffee time! Get your recipe just right and never forget your next pour again thanks to built in timers and alarms. 
 
-Recipes include chemex, aeropress, french press, and even tea.
+Recipes include chemex, aeropress, and french press.
 
 (This app is still in active development and is subject to change at any time)
 
