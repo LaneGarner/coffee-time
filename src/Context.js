@@ -16,9 +16,7 @@ export const ContextProvider = ({ children }) => {
     interval: 90,
   });
   const [waterUsed, setWaterUsed] = useState(0);
-
   const [active, setActive] = useState(0);
-
   const [repeatAlarm, setRepeatAlarm] = useState();
 
   const value = {
