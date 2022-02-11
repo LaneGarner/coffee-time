@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 
 import { Context } from "../../Context";
-
 import { PageContainer, SafeArea } from "../../utils/styled";
 import { Header } from "../../utils/Header";
 import { Recipe } from "./components/Recipe";
@@ -20,7 +19,6 @@ export const TimerScreen = () => {
 
   let content;
 
-  console.log(brewMethod);
   {
     brewMethod === "chemex"
       ? (content = [<Recipe next={next} />, <Bloom next={next} />, <FirstPour next={next} />, <SecondPour next={next} />, <FinalPour next={next} />, <CoffeeTime next={next} />])

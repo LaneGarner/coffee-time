@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 
 import { Context } from "../../../Context";
 
@@ -68,6 +68,12 @@ export const Recipe = ({ next }) => {
 
   const handleEditCoffeeClick = () => setEditCoffee(!editCoffee);
 
+  const handleDismissEdit = () => {
+    if(editCoffee) {
+      setEditCoffee(false)
+    }
+  }
+
   useEffect(() => {
     if (coffeeState === "") return;
     setRecipe({ ...recipe, coffee: parseInt(coffeeState) });
@@ -76,7 +82,7 @@ export const Recipe = ({ next }) => {
   useEffect(() => methods.forEach((item) => item.method === brewMethod && setRecipe(item)), [brewMethod]);
 
   return (
-    <>
+    <Pressable style={{width: '100%', alignItems: 'center'}} onPress={handleDismissEdit}>
       <TimerContainer>
         <TimerTitle>brew method</TimerTitle>
         <TimerValue>{brewMethod}</TimerValue>
@@ -134,6 +140,6 @@ export const Recipe = ({ next }) => {
       <Btn style={{ marginTop: 25 }} onPress={next}>
         <BtnText>start</BtnText>
       </Btn>
-    </>
+    </Pressable>
   );
 };
