@@ -1,68 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Pressable, View } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Context } from "../../../Context";
-
 import { TimerTitle, TimerValue, TimerValueEdit } from "../../../utils/styled";
 import { TouchableTimerContainer, TimerContainer, TimerContainerAlt, Btn, BtnText } from "../styled";
 
-const methods = [
-    {
-      method: "chemex",
-      ratio: 15.5,
-      coffee: 60,
-      grind: "medium",
-      temp: 200,
-      bloom: 45,
-      interval: 90,
-      // bloom: 4,
-      // interval: 11,
-    },
-    {
-      method: "aeropress",
-      ratio: 13,
-      coffee: 17.5,
-      grind: "fine",
-      temp: 200,
-      // bloom: 60,
-      // interval: 60,
-      bloom: 6,
-      interval: 6,
-    },
-    {
-      method: "french press",
-      ratio: 12,
-      coffee: 50,
-      grind: "coarse",
-      temp: 200,
-      bloom: 6,
-      interval: 6,
-    },
-    {
-      method: "green tea",
-      ratio: 113,
-      tea: 2,
-      temp: 175,
-      time: 180,
-    },
-    {
-      method: "black tea",
-      ratio: 113,
-      tea: 2,
-      temp: 205,
-      time: 240,
-    },
-    {
-      method: "herbal tea",
-      ratio: 113,
-      tea: 2,
-      temp: 212,
-      time: 600,
-    },
-  ];
-
 export const Recipe = ({ next }) => {
-  const { brewMethod, recipe, setRecipe } = useContext(Context);
+  const { brewMethod, recipe, setRecipe, methods, setMethods } = useContext(Context);
   
   const [coffeeState, setCoffeeState] = useState(Math.round(recipe.coffee).toString());
   const [editCoffee, setEditCoffee] = useState(false);
@@ -86,26 +31,40 @@ export const Recipe = ({ next }) => {
   const handleEditInterval = () => setEditInterval(!editInterval);
 
   const handleDismissEdit = () => {
-    if (editCoffee) {
-      setEditCoffee(false)
-    } else if (editRatio) {
-      setEditRatio(false)
-    } else if (editTemp) {
-      setEditTemp(false)
-    } else if (editBloom) {
-      setEditBloom(false)
-    } else if (editInterval) {
-      setEditInterval(false)
-    }
+    editCoffee && setEditCoffee(false)
+    editRatio && setEditRatio(false)
+    editTemp && setEditTemp(false)
+    editBloom && setEditBloom(false)
+    editInterval && setEditInterval(false)
   }
 
   useEffect(() => {
     if (coffeeState === "" || ratioState === "" || tempState === "" || bloomState === "" || intervalState === "") return;
     // TODO: local storage
+    console.log('methods...', methods)
     setRecipe({ ...recipe, coffee: parseInt(coffeeState), ratio: parseFloat(ratioState), temp: parseInt(tempState), bloom: parseInt(bloomState), interval: parseInt(intervalState) });
+    // setMethods([methods.forEach(m => m.method === brewMethod ? recipe : m)])
+    // console.log([methods.forEach(m => m.method === brewMethod ? recipe : m)])
   }, [coffeeState, ratioState, tempState, bloomState, intervalState]);
 
   useEffect(() => methods.forEach((item) => item.method === brewMethod && setRecipe(item)), [brewMethod]);
+
+  useEffect(()=> {
+    const updatedMethods = [];
+    methods.forEach(m => m.method === brewMethod ? updatedMethods.push(recipe) : updatedMethods.push(m))
+    setMethods(updatedMethods)
+  }, [recipe])
+  
+  useEffect(() => {
+    console.log('recipe change:', recipe);
+    (async () => {
+      try {
+        await AsyncStorage.setItem('data', JSON.stringify({methods, brewMethod, recipe }))
+      } catch (e) {
+        console.error(e)
+      }
+    })()
+  }, [methods])
 
   return (
     <Pressable style={{width: '100%', alignItems: 'center'}} onPress={handleDismissEdit}>
