@@ -9,5 +9,3 @@ Enter coffee time! Get your recipe just right and never forget your next pour ag
 Recipes include chemex, aeropress, and french press.
 
 (This app is still in active development and is subject to change at any time)
-
-

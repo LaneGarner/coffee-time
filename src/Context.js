@@ -15,8 +15,6 @@ export const ContextProvider = ({ children }) => {
   const [repeatAlarm, setRepeatAlarm] = useState();
 
   const setInitialData = async () => {
-    console.log('set initial data');
-
     //load my chemex recipe on initial load
     setMethods(initialData);
     setRecipe(initialData[0]);
@@ -30,7 +28,7 @@ export const ContextProvider = ({ children }) => {
   }
   
   const setStoredData = (data) => {
-    console.log('set stored data: ', data);
+    ('set stored data: ', data);
     setMethods(data.methods);
     setRecipe(data.recipe);
     setBrewMethod(data.brewMethod);

@@ -17,24 +17,6 @@ export const Timer = ({ time, next, addWater }) => {
   const [progress, setProgress] = useState(1);
   const [sound, setSound] = useState();
 
-  // const playSound = async () => {
-  //   console.log("Loading Sound");
-  //   const { sound } = await Audio.Sound.createAsync(require("../../../../hello.mp3"));
-  //   setSound(sound);
-
-  //   console.log("Playing Sound");
-  //   await sound.playAsync();
-  // }
-
-  // useEffect(() => {
-  //   return sound
-  //     ? () => {
-  //         console.log("Unloading Sound");
-  //         sound.unloadAsync();
-  //       }
-  //     : undefined;
-  // }, [sound]);
-
   const newWaterUsed = waterUsed + addWater;
 
   const onProgress = (progress) => {
@@ -56,8 +38,6 @@ export const Timer = ({ time, next, addWater }) => {
   };
 
   const onEnd = () => {
-    // playSound();
-
     vibrate();
     setWaterUsed(newWaterUsed);
     setProgress(1);
@@ -79,25 +59,18 @@ export const Timer = ({ time, next, addWater }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-  },
   title: {
-    // color: "white",
     textAlign: "center",
   },
   task: {
-    // color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
   countdown: {
-    // flex: 0.5,
     alignItems: "center",
     justifyContent: "center",
   },
   buttonWrapper: {
-    // flex: 0.3,
     flexDirection: "row",
     padding: 20,
     justifyContent: "center",

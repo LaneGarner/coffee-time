@@ -41,10 +41,7 @@ export const Recipe = ({ next }) => {
   useEffect(() => {
     if (coffeeState === "" || ratioState === "" || tempState === "" || bloomState === "" || intervalState === "") return;
     // TODO: local storage
-    console.log('methods...', methods)
     setRecipe({ ...recipe, coffee: parseInt(coffeeState), ratio: parseFloat(ratioState), temp: parseInt(tempState), bloom: parseInt(bloomState), interval: parseInt(intervalState) });
-    // setMethods([methods.forEach(m => m.method === brewMethod ? recipe : m)])
-    // console.log([methods.forEach(m => m.method === brewMethod ? recipe : m)])
   }, [coffeeState, ratioState, tempState, bloomState, intervalState]);
 
   useEffect(() => methods.forEach((item) => item.method === brewMethod && setRecipe(item)), [brewMethod]);
@@ -56,7 +53,6 @@ export const Recipe = ({ next }) => {
   }, [recipe])
   
   useEffect(() => {
-    console.log('recipe change:', recipe);
     (async () => {
       try {
         await AsyncStorage.setItem('data', JSON.stringify({methods, brewMethod, recipe }))
